@@ -1,6 +1,5 @@
 import requests
 import json
-from
 
 def j_keys(obj):
     try:
@@ -34,9 +33,11 @@ def get_opportunity_by_id(id):
 
 def search_job(*args, **kwargs):
     x = requests.post('https://search.torre.co/opportunities/_search/?[offset={offset}&size={size}&aggregate={aggregate}]'.format(**data))
+    x = requests.post('https://search.torre.co/opportunities/_search/?[offset=0&size=01&aggregate=True&status=close]')
     if(x.status_code!=200):
+       print("error")
        return 
-    j_keys(x.json()["results"])
+    j_print(x.json())
 
-data ={"offset": 0, "size": 2, "aggregate":""}
+data ={"offset": 0, "size": 1, "aggregate": False}
 search_job(data)

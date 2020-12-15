@@ -1,18 +1,39 @@
 {%extends "base.html"%}
 
 {%block content%}
-<div class = "row mt-4">
-    <div class = "col">
-        <form action = "search_bar/" method = "POST" class ="form-inline"> {% csrf_token %}
+<br>
+<h2>JOBS ARE OUR JOB.</h2>
+<form class="form-inline">
+    <div class = "row">
 
-                <input type="text" required name="content" class="form-control" placeholder="Type here...">
+        <div class="col-5">
+            <label class="sr-only"></label>
+            <input type="search" class="form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder="Job" value=""   style="background-color: transparent;">
+        </div>
 
-            <div class = "col-auto">
-                <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="col-3">
+            <label class="sr-only"></label>
+            <div class="input-group mb-2 mr-sm-2">
+            <input type="search" class="form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder="Place" value=""   style="background-color: transparent;">
             </div>
-        </form>
+        </div>
+
+        <div class="col-1 mt-4">
+
+            <div class="form-check mt-2">
+                <input class="form-check-input" type="checkbox">
+                <label class="form-check-label">
+                    Remote
+                </label>
+            </div> 
+        </div> 
+        <div class="col mt-4">
+
+            <button type="submit" class="btn btn-primary mb-2">Find Jobs</button>
+        </div> 
+
     </div>
-</div>
+</form>
 
 
 {%endblock content%}
