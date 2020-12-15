@@ -1,7 +1,8 @@
 #own 
-note.txt
+notes.txt
 venv
-
+.vscode
+tech_test/tech_test/keys.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
