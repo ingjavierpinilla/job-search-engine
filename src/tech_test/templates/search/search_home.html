@@ -8,13 +8,13 @@
         <form  action = "{%url 'get_query'%}"  id = "job_query_form" class = "form-inline row row-cols-xl-auto g-3 align-items-center"> {% csrf_token %}
             <div class = "col">
             <label class = "visually-hidden">Job</label>
-            <input type = "search" required  name = "job_search" class = "form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder ="Job" style="background-color: transparent;" value = {{job_search}}>
+            <input type = "search" required  name = "job_search" class = "form-control typeahead search-box__field search-box__field-what typeahead__input border-1 border-success" placeholder ="Job" style="background-color: transparent;" value = {{job_search}}>
 
             </div>
         
             <div class="col-md-auto">
             <label class = "visually-hidden">Place</label>
-            <input type = "search" name = "place_search" class = "form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder ="Place" style="background-color: transparent;" value = {{place_search}}>
+            <input type = "search" name = "place_search" class = "form-control typeahead search-box__field search-box__field-what typeahead__input border-1 border-success" placeholder ="Place" style="background-color: transparent;" value = {{place_search}}>
 
             </div>
         
@@ -28,12 +28,12 @@
             </div>
         
             <div class="col">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Find</button>
             </div>
         </form>
     </div>
 </div>
-<div class= "container"> 
+<div class= "container mt-4"> 
 {%block search_result%}{%endblock search_result%}
 </div>
 {%endblock search_bar%}

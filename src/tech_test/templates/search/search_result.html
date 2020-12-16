@@ -1,6 +1,6 @@
 {%extends "search\search_home.html"%}
 {%block search_result%}
-<p>{{job}}</p>
+
 <div class="row">
 
     <div class="col-lg-3">
@@ -72,19 +72,22 @@
 
 
       <div class="row">
-        {% for job in jobs %}
+        {% for job in job_items %}
           <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card h-100 border-2 border-success">
+              <a href="#"><img class="card-img-top" src={{job.organization_picture}} alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">{{job["objective"]}}</a>
+                  <a href="#">{{job.objective}}</a>
                 </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                <h5>{{job.organization_name}}</h5>
+                <p class="card-text mt-2 mb-1">
+                  <b>Type: </b>{{job.type}}<br>
+                  <b>Skills: </b>{{job.skills}}<br>
+                  <b>Location: </b>{{job.locations}} </p>
               </div>
               <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                <small class="text-dark">{{job.compensation}}</small>
               </div>
             </div>
           </div>
