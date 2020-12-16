@@ -8,19 +8,19 @@
         <form  action = "{%url 'get_query'%}"  id = "job_query_form" class = "form-inline row row-cols-xl-auto g-3 align-items-center"> {% csrf_token %}
             <div class = "col">
             <label class = "visually-hidden">Job</label>
-            <input type = "search" required  name = "job" class = "form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder ="Job" style="background-color: transparent;" value = {{job}}>
+            <input type = "search" required  name = "job_search" class = "form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder ="Job" style="background-color: transparent;" value = {{job_search}}>
 
             </div>
         
             <div class="col-md-auto">
             <label class = "visually-hidden">Place</label>
-            <input type = "search" name = "place" class = "form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder ="Place" style="background-color: transparent;" value = {{place}}>
+            <input type = "search" name = "place_search" class = "form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder ="Place" style="background-color: transparent;" value = {{place_search}}>
 
             </div>
         
             <div class="col">
             <div class="form-check">
-                <input class="form-check-input" name="remote" type="checkbox">
+                <input class="form-check-input" name="remote_search" type = "checkbox" {{remote_search}}>
                 <label class="form-check-label" >
                 Remote
                 </label>
