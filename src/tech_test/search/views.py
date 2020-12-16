@@ -1,15 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 # Create your views here.
-def home(request):
+def search(request):
+    context ={'job': '','place': ''}
+    return render(request, "search/search_home.html",context)
 
-    return render(request, "search/index.html")
+def get_query(request):
 
-def search_bar(request):
-    print(request)
-    if request.method == "POST":
-        current_date = timezone.now()
-        content = request.POST["content"]
+    context = {'job':request.GET['job']}
 
-    return HttpResponseRedirect("/")
+    return render(request, "search/search_result.html",context)

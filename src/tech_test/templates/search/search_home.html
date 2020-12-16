@@ -1,27 +1,27 @@
 {%extends "base.html"%}
 
-{%block content%}
+{%block search_bar%}
 <br>
 <h2>JOBS ARE OUR JOB.</h2>
-<form class="form-inline">
+<form action = "{%url 'get_query'%}" class="form-inline" method="get"> {% csrf_token %}
     <div class = "row">
 
         <div class="col-5">
             <label class="sr-only"></label>
-            <input type="search" class="form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder="Job" value=""   style="background-color: transparent;">
+            <input type="search" required name="job" class="form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder="Job" value= "{{job}}"   style="background-color: transparent;">
         </div>
 
         <div class="col-3">
             <label class="sr-only"></label>
             <div class="input-group mb-2 mr-sm-2">
-            <input type="search" class="form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder="Place" value=""   style="background-color: transparent;">
+            <input type="search" name="place" class="form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder="Place" value=""   style="background-color: transparent;">
             </div>
         </div>
 
         <div class="col-1 mt-4">
 
             <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox">
+                <input class="form-check-input" name="remote" type="checkbox">
                 <label class="form-check-label">
                     Remote
                 </label>
@@ -35,5 +35,6 @@
     </div>
 </form>
 
+{%block search_result%}{%endblock search_result%}
 
-{%endblock content%}
+{%endblock search_bar%}

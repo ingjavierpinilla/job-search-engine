@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import home, search_bar
+from .views import search, get_query
 
 
 urlpatterns = [
-    path('', home),
-    path('search_bar/', search_bar),
+    path('', search, name = 'search'),
+    path('get_query/', get_query, name ='get_query'),
 ]
