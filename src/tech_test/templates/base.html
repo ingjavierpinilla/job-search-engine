@@ -11,31 +11,45 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="#">Tech test Javier </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Home
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Search</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">You may know</a>
-              </li>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Tech test Javier </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+          <a class="nav-link" href="#">Home
+          </a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="#">Search</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="#">You may know</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-            </ul>
-          </div>
-        </div>
-      </nav>
-    <div class= "container"> 
-        {% block search_bar %}{% endblock %}
-    </div> 
-    </body>
+
+  {% block search_bar %}{% endblock %}
+
+</body>
+<style>      
+  body{
+      padding-top:60px;
+  }
+  @media screen and (max-width: 767px) {
+      body { padding-top: 60px; }
+  }
+  @media screen and (min-width:768px) and (max-width: 991px) {
+      body { padding-top: 110px; }
+  }
+  @media screen and (min-width: 992px) {
+      body { padding-top: 60px; }
+  }
+</style>
 </html>
