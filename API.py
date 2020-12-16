@@ -12,10 +12,12 @@ def j_keys(obj):
             return
 
 
-def j_print(obj):
+def j_print(obj, name):
 
-    J = json.dumps(obj, sort_keys=False, indent=4)
-    print(J)
+    #J = json.dumps(obj, sort_keys=False, indent=4)
+    #print(J)
+    with open(f'{name}.json', 'w') as outfile:
+        json.dump(obj, outfile, indent=4)
 
 def get_user_by_username(username):
 
@@ -31,13 +33,13 @@ def get_opportunity_by_id(id):
         return 
     j_keys(x.json())
 
-def search_job(*args, **kwargs):
-    x = requests.post('https://search.torre.co/opportunities/_search/?[offset={offset}&size={size}&aggregate={aggregate}]'.format(**data))
-    x = requests.post('https://search.torre.co/opportunities/_search/?[offset=0&size=01&aggregate=True&status=close]')
+def search_job():
+    url = 'https://search.torre.co/opportunities/_search/?currency=USD%24&page=0&periodicity=hourly&lang=en&size=2&aggregate=false&offset=0'
+    header = {"content-type": "application/json"}
+    payload = {"remote":{"term":True}}
+    x= requests.post(url,data=json.dumps(payload), headers=header, verify=False)
     if(x.status_code!=200):
        print("error")
-       return 
-    j_print(x.json())
+    j_print(x.json(),"results")
 
-data ={"offset": 0, "size": 1, "aggregate": False}
-search_job(data)
+search_job()
