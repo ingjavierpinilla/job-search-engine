@@ -1,21 +1,20 @@
 {%extends "base.html"%}
-
 {%block search_bar%}
 <div class='container'>
     <div class="row text-center">
         <h1>JOBS ARE OUR JOB.</h1>
     </div>
     <div class="d-flex justify-content-around mt-3">
-        <form  action = "{%url 'get_query'%}" class = "form-inline row row-cols-xl-auto g-3 align-items-center" method = "get"> {% csrf_token %}
+        <form  action = "{%url 'get_query'%}"  id = "job_query_form" class = "form-inline row row-cols-xl-auto g-3 align-items-center"> {% csrf_token %}
             <div class = "col">
             <label class = "visually-hidden">Job</label>
-            <input type = "search" required name = "job" class = "form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder ="Job" value = "{{job}}" style="background-color: transparent;">
+            <input type = "search" required  name = "job" class = "form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder ="Job" style="background-color: transparent;" value = {{job}}>
 
             </div>
         
             <div class="col-md-auto">
             <label class = "visually-hidden">Place</label>
-            <input type = "search" name = "place" class = "form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder ="Place" value = "{{place}}" style="background-color: transparent;">
+            <input type = "search" name = "place" class = "form-control typeahead search-box__field search-box__field-what typeahead__input" placeholder ="Place" style="background-color: transparent;" value = {{place}}>
 
             </div>
         
