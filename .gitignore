@@ -5,6 +5,7 @@ venv
 /src/tech_test/tech_test/keys.py
 src/tech_test/Procfile
 src/tech_test/runtime.txt
+src/tech_test/staticfiles
 *.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
