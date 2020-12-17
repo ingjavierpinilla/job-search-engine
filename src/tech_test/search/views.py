@@ -8,7 +8,7 @@ from .utils import get_query_request_handle, parse_jobs
 # Create your views here.
 def search(request):
 
-    context ={'job_search': '','place_search': '', 'remote_search': ''}
+    context ={'job_search': '','place_search': '', 'remote_search': '', 'willkommen': True}
     return render(request, "search/search_home.html", context)
 
 def get_query(request):
@@ -16,13 +16,13 @@ def get_query(request):
         Job.objects.all().delete()
     except:
         pass
-    context, skills_selected, types_selected = get_query_request_handle(request, get_aggregators())
+    context, skills_selected, types_selected, orgs_selected = get_query_request_handle(request, get_aggregators())
     remote = False
     if context.get('remote_search') == 'checked':
         remote = True
-    jobs = search_job(size = 15, remote = remote, skills = skills_selected, type = types_selected)
+    jobs = search_job(size = 15, remote = remote, skills = skills_selected, type = types_selected, organization = orgs_selected, place = [context.get('place_search','')])
     
-    if len(jobs) != 0:
+    if (jobs is not None and len(jobs) != 0):
         parse_jobs(jobs)     
         context['job_items'] = Job.objects.all()
 
