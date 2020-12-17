@@ -2,7 +2,9 @@
 notes.txt
 venv
 .vscode
-tech_test/tech_test/keys.py
+/src/tech_test/tech_test/keys.py
+src/tech_test/Procfile
+src/tech_test/runtime.txt
 *.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -133,4 +135,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
 
