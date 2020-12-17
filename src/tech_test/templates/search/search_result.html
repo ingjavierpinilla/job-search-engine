@@ -1,6 +1,11 @@
 {%extends "search\search_home.html"%}
 {%block search_result%}
 
+<h4>
+  <p class="badge badge-success">Success Badge</p> 
+  <p class="badge badge-success">Success Badge</p>
+</h4>
+
 <div class="row">
 
     <div class="col-lg-3">
@@ -14,16 +19,17 @@
               </div>
               <div id="collapseOne" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-               
-                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                        <div class="btn-group-vertical mr-2" role="group" aria-label="First group">
-                          <button form ='job_query_form' type="submit" class="btn btn-secondary">1</button>
-                          <button form ='job_query_form'  type="button" class="btn btn-secondary">2</button>
-                          <button form ='job_query_form'  type="button" class="btn btn-secondary">3</button>
-                          <button form ='job_query_form'  type="button" class="btn btn-secondary">4</button>
+                  <div class="col">
+                          {% for skill in skills_checkbox %}
+                            <div class="form-check">
+                              <input class="form-check-input" form ='job_query_form' name="skill.{{skill.value}}" type = "checkbox" {{skill.checked}}>
+                              <label class="form-check-label" >
+                              {{skill.value}}
+                              </label>
+                            </div>
+                          {% endfor %}  
                         </div>
-                    </div>
-                </div>
+                  </div>
               </div>
             </div>
           
@@ -35,8 +41,17 @@
               </div>
               <div id="collapseTwo" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                  Lorem ipsum..
-                </div>
+                  <div class="col">
+                          {% for t in type_checkbox %}
+                            <div class="form-check">
+                              <input class="form-check-input" form ='job_query_form' name="type.{{t.value}}" type = "checkbox" {{t.checked}}>
+                              <label class="form-check-label" >
+                              {{t.value}}
+                              </label>
+                            </div>
+                          {% endfor %}  
+                        </div>
+                  </div>
               </div>
             </div>
           
@@ -72,26 +87,31 @@
 
 
       <div class="row">
-        {% for job in job_items %}
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100 border-2 border-success">
-              <a href="#"><img class="card-img-top" src={{job.organization_picture}} alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">{{job.objective}}</a>
-                </h4>
-                <h5>{{job.organization_name}}</h5>
-                <p class="card-text mt-2 mb-1">
-                  <b>Type: </b>{{job.type}}<br>
-                  <b>Skills: </b>{{job.skills}}<br>
-                  <b>Location: </b>{{job.locations}} </p>
-              </div>
-              <div class="card-footer">
-                <small class="text-dark">{{job.compensation}}</small>
+        {%if job_items %}
+          {% for job in job_items %}
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100 border-2 border-success">
+                <a href="#"><img class="card-img-top" src={{job.organization_picture}} alt=""></a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="#">{{job.objective}}</a>
+                  </h4>
+                  <h5>{{job.organization_name}}</h5>
+                  <p class="card-text mt-2 mb-1">
+                    <b>Type: </b>{{job.type}}<br>
+                    <b>Skills: </b>{{job.skills}}<br>
+                    <b>Location: </b>{{job.locations}} </p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-dark">{{job.compensation}}</small>
+                </div>
               </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+          {% else %}
+          <h1>No results to show</h1>
+          
+        {% endif %}
       </div>
       <!-- /.row -->
 

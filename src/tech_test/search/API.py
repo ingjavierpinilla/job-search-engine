@@ -25,7 +25,11 @@ def get_aggregators():
     keys = x.json()['aggregators']
     keys.pop('organization')
     keys.pop('status')
-    return keys
+    for field in keys:
+        for id in keys.get(field):
+            id['checked'] = ''
+
+    return keys.get('skill'), keys.get('type')
 
 def payload_generator(remote = False, skills = [], type = [], compensationrange = [], timezone = []):
     """[summary]
