@@ -46,7 +46,8 @@ def payload_generator(remote = False, skills = [], type = [], compensationrange 
         [dictionary]: A dictionary with the form {"and": [{"remote": {"term": True}}, {"skill": {"term": skill, "experience": "potential-to-develop"}}]}
     """
     l = []
-
+    if(not(skills and type and compensationrange and timezone)):
+        return {}
     l.append({"remote": {"term": remote}})
     if len(skills) != 0:
         for skill in skills:
@@ -67,12 +68,11 @@ def payload_generator(remote = False, skills = [], type = [], compensationrange 
     return {"and": l}
 
 
-def search_job(main_seacrh = "", size = 2, place = [], remote = False, skills = [], type = [], compensationrange = [], timezone = []):
-    url = f'https://search.torre.co/opportunities/_search/?currency=USD%24&page=0&periodicity=hourly&lang=en&size={size}&aggregate=false&offset=0'
+def search_job(main_seacrh = "",offset = 0, size = 2, place = [], remote = True, skills = [], type = [], compensationrange = [], timezone = []):
+    url = f'https://search.torre.co/opportunities/_search/?currency=USD%24&page=0&periodicity=hourly&lang=en&size={size}&aggregate=false&offset={offset}'
     header = {"content-type": "application/json"}
     payload = payload_generator(remote, skills = skills, type = type)
-    x = requests.post(url,data=json.dumps(payload), headers=header, verify=False)
+    x = requests.post(url,data=json.dumps(payload), headers=header, verify = False)
     if(x.status_code!=200):
        return None
     return x.json()['results']
- 

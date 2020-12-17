@@ -3,11 +3,11 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import Job
 from .API import search_job, get_aggregators
+from contextlib import suppress
 
 # Create your views here.
 def search(request):
-    Skill.objects.all().delete()
-    Type.objects.all().delete()
+
     context ={'job_search': '','place_search': '', 'remote_search': ''}
     return render(request, "search/search_home.html", context)
 
@@ -15,11 +15,18 @@ def get_query(request):
 
 
     context, skills_selected, types_selected = get_query_request_handle(request, get_aggregators())
-    jobs = search_job(size = 9, remote = True, skills = skills_selected, type = types_selected)
+    remote = False
+    if context.get('remote_search') == 'checked':
+        remote = True
+    jobs = search_job(size = 15, remote = remote, skills = skills_selected, type = types_selected)
     if len(jobs) != 0:
 
         Job.objects.all().delete()
+        i = 15
         parse_jobs(jobs)
+        while(Job.objects.count()<15):
+            parse_jobs(search_job(offset = i, size = 15, remote = remote, skills = skills_selected, type = types_selected))
+            i += i
         job_items = Job.objects.all()
         
         context['job_items'] = job_items
@@ -27,10 +34,8 @@ def get_query(request):
     return render(request, "search/search_result.html",context)
 
 def get_query_request_handle(request, *args):
-    args = args[0]
     context = {}
-    skills = []
-    types = []
+
     job_search = request.GET.get('job_search',"")
     context['job_search'] = job_search
 
@@ -43,6 +48,8 @@ def get_query_request_handle(request, *args):
         remote_search = ''
     context['remote_search'] = remote_search
 
+    skills = []
+    types = []
     for val in request.GET.keys():
         if 'skill.' in val:
             aux  = val.split(".", 1)[1]
@@ -51,7 +58,8 @@ def get_query_request_handle(request, *args):
             aux  = val.split(".", 1)[1]
             types.append(aux)
     
-
+ 
+    args = args[0]
 
     skills_checkbox = args[0]
     for skill in skills_checkbox:
@@ -63,25 +71,38 @@ def get_query_request_handle(request, *args):
     for type in type_checkbox:
         if type.get('value') in types:
             type['checked'] = 'checked'
-    context['type_checkbox'] = type_checkbox     
+    context['type_checkbox'] = type_checkbox
+    filters = skills + types
+    if remote_search != '':
+        filters += ['Remote']
+    context['filters'] =  filters  
     return context, skills, types
 
 def parse_jobs(jobs):
     for job in jobs:
-        id = job.get('id')
-        objective = job.get('objective')
-        type = job.get('type')
-        organization_name = job.get('organizations')[0].get('name')
-        organization_picture = job.get('organizations')[0].get('picture')
-        locations = job.get('locations')
-        remote = job.get('remote')
+        id = job.get('id', '')
+        objective = job.get('objective', '')
+        type = job.get('type', '')
+        organization_name = ''
+        organization_picture = ''
+        try:
+            organization_name = job.get('organizations')[0].get('name')
+        except :
+            break
+        try:
+            organization_picture = job.get('organizations')[0].get('picture')
+        except :
+            pass
+
+        locations = job.get('locations', '')
+        remote = job.get('remote', '')
         if remote:
             locations.append("Remote")
         if len(locations) != 0:
             locations = ', '.join(locations)
         skills =[]
         for skill in job.get('skills'):
-            skills.append(skill.get('name'))
+            skills.append(skill.get('name', ''))
         skills = ', '.join(skills)
         if job.get('compensation') != None:
             if job.get('compensation').get('visible') != None:
