@@ -29,7 +29,7 @@ def get_query_request_handle(request, *args):
 
     place_search = request.GET.get('place_search',"")
     try:
-        place_search = countries.get(place_search[4])
+        place_search = countries.get(place_search)[4]
     except:
         place_search = ''
     context['place_search'] = place_search
