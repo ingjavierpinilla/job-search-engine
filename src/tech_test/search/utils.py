@@ -1,8 +1,8 @@
 import nltk
 import re
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
+#nltk.download('punkt')
+#nltk.download('stopwords')
+#nltk.download('wordnet')
 from nltk.corpus import stopwords, wordnet
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
@@ -111,6 +111,8 @@ def parse_jobs(jobs):
             break
         try:
             organization_picture = job.get('organizations')[0].get('picture')
+            if organization_picture is None:
+                organization_picture = ''
         except :
             pass
 
